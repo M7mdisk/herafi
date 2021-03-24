@@ -15,12 +15,16 @@ class Profile(models.Model):
     location = models.PointField()
     address = models.CharField(max_length=100)
     city = models.CharField(max_length=50)
-    professions = models.ForeignKey(models, on_delete=models.PROTECT)
+    professions = models.CharField(max_length=50)
+    n_customers = models.PositiveIntegerField()
+    n_likes = models.PositiveIntegerField()
 
 
 class Review(models.Model):
-    reviewer = models.ForeignKey(Profile, on_delete=models.CASCADE)
-    reviewee = models.ForeignKey(Profile, on_delete=models.CASCADE)
+    reviewer = models.ForeignKey(
+        Profile, on_delete=models.CASCADE, related_name="reviewer")
+    reviewee = models.ForeignKey(
+        Profile, on_delete=models.CASCADE, related_name="reviewee")
     rating = models.IntegerField(
         validators=[MinValueValidator(1), MaxValueValidator(5)])
     review_text = models.TextField(max_length=100)
