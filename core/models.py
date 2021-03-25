@@ -12,7 +12,7 @@ class Profile(models.Model):
     created_at = models.DateTimeField(auto_now_add=True)
     phone_number = PhoneNumberField()
     bio = models.TextField()
-    location = models.PointField()
+    location = models.PointField(null=True)
     address = models.CharField(max_length=100)
     city = models.CharField(max_length=50)
     professions = models.CharField(max_length=50)

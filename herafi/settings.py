@@ -25,7 +25,7 @@ SECRET_KEY = '4kfbg57$p^!hejb$m-$@f#d7!t$&4a-qs70!#wxa83=t)-5jp%'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ["*"]
 
 
 # Application definition
@@ -39,6 +39,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'core.apps.CoreConfig',
     'phonenumber_field',
+    'django.contrib.gis',
 ]
 
 MIDDLEWARE = [
@@ -77,8 +78,11 @@ WSGI_APPLICATION = 'herafi.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        'ENGINE': 'django.contrib.gis.db.backends.postgis',
+        'NAME': 'dd90jdbjcpb4g6',
+        'USER': 'enrhppynrdctit',
+        'PASSWORD':'a0e563ff177f06dfe3ae2d20c83129c380da77a8fb1873dce6d5d0d2e8602925',
+	'HOST' : 'ec2-3-91-127-228.compute-1.amazonaws.com'
     }
 }
 
