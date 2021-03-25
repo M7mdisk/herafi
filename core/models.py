@@ -14,6 +14,17 @@ class Profile(models.Model):
     def __str__(self):
         return f'{self.user.username} Profile'
 
+
+class Profession(models.Model):
+    name = models.CharField(max_length=50)
+
+    class Meta:
+        ordering = ['name']
+
+    def __str__(self):
+        return self.name
+
+
 class Worker(models.Model):
     profile = models.OneToOneField(Profile,primary_key=True, on_delete=models.CASCADE, related_name="profile")
     phone_number = PhoneNumberField()
@@ -21,7 +32,7 @@ class Worker(models.Model):
     location = models.PointField()
     address = models.CharField(max_length=100)
     city = models.CharField(max_length=50)
-    professions = models.CharField(max_length=50)
+    professions = models.ManyToManyField(Profession)
 
     @property
     def ratings(self):
@@ -41,3 +52,6 @@ class Review(models.Model):
     rating = models.IntegerField(
         validators=[MinValueValidator(1), MaxValueValidator(5)])
     review_text = models.TextField(max_length=100)
+
+    def __str__(self):
+        return f"{self.reviewee}'s review"
