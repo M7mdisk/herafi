@@ -1,0 +1,42 @@
+{% extends 'base.html' %}
+
+{% block title %}
+7erafi-Register
+{%endblock%}
+
+<div>
+
+    {% block buttons %}
+    <!-- Home page button "/" -->
+    <li class="nav-item active">
+        <a class="nav-link" href="/">Home <span class="sr-only">(current)</span></a>
+    </li>
+    <!-- About Page button 'about/' -->
+    <li class="nav-item">
+        <a class="nav-link" href="about/">About</a>
+    </li>
+    <li class="nav-item dropdown">
+
+        <!-- Login and register section -->
+        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown"
+            aria-haspopup="true" aria-expanded="false">
+            Join Us
+        </a>
+        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+            <a class="dropdown-item" href="login/">Login</a>
+            <a class="dropdown-item" href="register/">Register</a>
+            <div class="dropdown-divider"></div>
+            <a class="dropdown-item" href="#">Are You a tradesman?</a>
+        </div>
+    </li>
+    <!-- Coming Soon button (disabled) -->
+    <li class="nav-item">
+        <a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true">Comin Soon</a>
+    </li>
+    </ul>
+    {% endblock %}
+
+    {% block content %}
+    {% endblock %}
+
+</div>
