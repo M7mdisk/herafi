@@ -1,0 +1,17 @@
+:root {
+    --main-color:#3E4ECA;
+    --ligher-main: #4D61FC;
+    --accent-tint-1:#F3F3FF;
+    --accent-tint-2:#DBDBFF;
+}
+
+.tag{
+    background-color: var(--accent-tint-2) 
+}
+
+.color{
+    color:var(--main-color)
+}
+.bcolor{
+    background-color:var(--main-color)
+}

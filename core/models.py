@@ -35,6 +35,9 @@ class Worker(models.Model):
     professions = models.ManyToManyField(Profession)
 
     @property
+    def list_professions(self):
+        return self.professions.all()
+    @property
     def ratings(self):
         return Review.objects.filter(reviewee=self)
     @property

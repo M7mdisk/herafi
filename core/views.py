@@ -1,6 +1,9 @@
 from django.shortcuts import render
 from django.http import HttpResponse
-from .models import Profile, Review, Worker
+from .models import Profile, Review, Worker, Profession
+from django.views import generic
+from django.contrib.gis.geos import fromstr
+from django.contrib.gis.db.models.functions import Distance
 # Create your views here.
 
 def index(request):
@@ -21,3 +24,10 @@ def login(request):
 
 def register(request):
     return render(request, 'register.html')
+
+def search(request):
+    workers_list = Worker.objects.all()
+    context = {
+        "workers":workers_list,
+    }
+    return render(request, 'search.html',context)
