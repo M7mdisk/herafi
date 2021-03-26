@@ -11,7 +11,6 @@ def index(request):
 
 def home(request):    
     return render(request, 'home.html')
-    # return HttpResponse("<h1>Home</h1>")
 
 def about(request):
     return render(request, 'about.html')
