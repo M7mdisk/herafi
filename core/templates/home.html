@@ -1,39 +1,71 @@
 {% extends 'base.html' %}
+{% load static %}
+{% load leaflet_tags %}
+
+{% block css %}
+<link rel="stylesheet" href="{% static 'css/style.css' %}">
+{% leaflet_js %}
+{% leaflet_css %}
+{%endblock%}
 
 {% block title %}
 7erafi-HomePage
 {%endblock%}
 
 {% block content %}
-<div class="container-fluid">
+<div class="">
+    <!-- Header -->
     <h1 style="text-align: center;">Find a Qualified Tradesmen
         For Any Of Your Needs.
     </h1>
-    <div class="container">
-        <form class="d-flex">
-            <input class="form-control me-2" type="search" placeholder="I'm Looking For.." aria-label="Search">
-            <button class="btn btn-outline-success" type="submit">Search</button>
-        </form>
-        <div>
-            <h6 style="opacity: 50%; "><a href="#">Are you a tradesman?</a></h6>
+
+    <!-- Search Bar -->
+    <div class="search d-flex justify-content-center align-items-center">
+        <div style="width:35%">
+
+            <div class="input-group">
+                <select class="form-select" id="inputGroupSelect04" aria-label="Example select with button addon">
+                    <option>I am Looking for..</option>
+                    {% for profession in professions %}
+                    <option value="{{profession.pk}}">{{profession.name}}</option>
+                    {% endfor %}
+                </select>
+
+                <select class="form-select" id="inputGroupSelect04" aria-label="Example select with button addon">
+                    <option value="">Location..</option>
+                    {% for profession in professions %}
+                    <option value="{{profession.pk}}">{{profession.name}}</option>
+                    {% endfor %}
+                </select>
+                <button class="btn btn-dark" type="button"><i class="fas fa-search"></i></button>
+            </div>
         </div>
     </div>
-
+    <img src="static/images/tradesman-working-on-pipes-vector.jpg" class="rounded mx-auto d-block" alt="..." width="300" height="300" style="margin-top: 100px;">
     <div class="row">
-        <div class="col-lg" style="margin-top: 500px; text-align: center;">
+        <div class="col-lg" style="margin-top: 150px; text-align: center;">
+            <div class="text-center">
+                <img src="static/images/pin.png" class="rounded" alt="..." width="50" height="50">
+            </div>
             <h3>Find</h3>
             <p style="text-align: center;">A Tradesman near you with
                 the skills you need.
             </p>
         </div>
-        <div class="col-lg" style="margin-top: 500px; text-align: center;">
+        <div class="col-lg" style="margin-top: 150px; text-align: center;">
+            <div class="text-center">
+                <img src="static/images/email.png" class="rounded" alt="..." width="50" height="50">
+            </div>
             <h3>Contact</h3>
             <p>
                 The Tradesman and discuss
                 your requirments.
             </p>
         </div>
-        <div class="col-lg" style="margin-top: 500px; text-align: center;">
+        <div class="col-lg" style="margin-top: 150px; text-align: center;">
+            <div class="text-center">
+                <img src="static/images/check.png" class="rounded" alt="..." width="50" height="50">
+            </div>
             <h3>Accomplish</h3>
             <p>
                 Get the task you need done by
@@ -43,3 +75,5 @@
     </div>
 </div>
 {% endblock %}
+
+<!-- tradesman-working-on-pipes-vector.jpg -->
