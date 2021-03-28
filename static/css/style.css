@@ -4,14 +4,61 @@
     --accent-tint-1:#F3F3FF;
     --accent-tint-2:#DBDBFF;
 }
-
+body{
+    font-family: "Roboto",sans-serif !important;
+}
 .tag{
-    background-color: var(--accent-tint-2) 
+    background-color: var(--accent-tint-2) !important;
 }
 
 .color{
-    color:var(--main-color)
+    color:var(--main-color)!important;
 }
 .bcolor{
-    background-color:var(--main-color)
+    background-color:var(--main-color)!important;
+}
+.lighter{
+    color:var(--ligher-main)!important;
+}
+.blighter{
+    background-color:var(--ligher-main)!important;
+}
+.accent1{
+    color:var(--accent-tint-1)!important;
+}
+.baccent1{
+    background-color:var(--accent-tint-1)!important;
+}
+.accent2{
+    color:var(--accent-tint-2)!important;
+}
+.baccent2{
+    background-color:var(--accent-tint-2)!important;
+}
+#main{
+    height: 100%;
+    width: 100%;
+}
+
+
+@keyframes shadowPulse {
+    from {
+        z-index: 1;
+        box-shadow: -5px 10px 20px var(--main-color) !important;    }
+
+    to {
+        z-index: 1;
+        box-shadow: -5px 10px 20px var(--main-color) !important;    }
+}
+
+.shadow-pulse {
+    animation-name: shadowPulse ;
+    animation-duration: 1.5s;
+    animation-iteration-count: 1;
+    animation-timing-function: linear;
+}
+
+.search{
+    background-color: var(--main-color);
+    height: 100px;
 }

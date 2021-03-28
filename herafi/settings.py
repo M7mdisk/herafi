@@ -41,6 +41,7 @@ INSTALLED_APPS = [
     'core.apps.CoreConfig',
     'phonenumber_field',
     'django.contrib.gis',
+    'leaflet'
 ]
 
 MIDDLEWARE = [
@@ -127,8 +128,8 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 
-MEDIA_ROOT = ''
-MEDIA_URL = '/'
+MEDIA_ROOT = 'media/'
+MEDIA_URL = '/media/'
 
 STATICFILES_DIRS = (
     os.path.join(BASE_DIR, "static"),

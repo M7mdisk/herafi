@@ -1,54 +1,125 @@
 {% extends 'base.html' %}
 {% load static %}
+{% load leaflet_tags %}
+
 {% block css %}
 <link rel="stylesheet" href="{% static 'css/style.css' %}">
+{% leaflet_js %}
+{% leaflet_css %}
 {%endblock%}
 {% block title %}
 7erafi - Search results
 {%endblock%}
 {% block content %}
 <div class="">
-    <div class="row">
+    <div class="search d-flex justify-content-center align-items-center">
+        <div style="width:35%">
 
-        <div class="col">
+            <div class="input-group">
+                <input type="text" class="form-control" aria-label="Text input with segmented dropdown button">
 
-            {% for worker in workers %}
-            <div class="card mb-3 rounded-3">
-                <div class="row g-0 ">
-                    <div class="col-md-4">
-                        <img style="width: 100%;" class="p-3" src="{{worker.profile.avatar.url}}" alt="...">
-                    </div>
-                    <div class="col-md-8">
-                        <div class="card-body">
-                            <h5 class="card-title color">{{worker.profile.user.first_name}}
-                                {{worker.profile.user.last_name}}
-                            </h5>
-                            <h6 class="card-subtitle mb-2 text-muted"><i
-                                    class="fas fa-map-marker-alt me-2"></i>{{worker.city}}
-                                -
-                                {{worker.address}}</h6>
-                            <div class="d-flex flex-row">
+                <select class="form-select" id="inputGroupSelect04" aria-label="Example select with button addon">
+                    {% for profession in professions %}
+                    <option value="{{profession.pk}}">{{profession.name}}</option>
+                    {% endfor %}
+                </select>
+                <button class="btn btn-dark" type="button"><i class="fas fa-search"></i></button>
+            </div>
+        </div>
+    </div>
+    <div class="row ">
+        <div class="bg-white p-3 col vh-100 d-inline-block">
+            <div class="m">
 
-                                {% for tag in worker.list_professions %}
-                                <div class="badge rounded-pill bg-primary  ms-1 p-1 x-2 rounded">
+                <h2 class="ps-3 fw-bold">{{workers|length}} Worker {% if workers|length > 1 %}s{% endif %}
+                    found in
+                    {{location}}.
+                </h2>
 
-                                    {{tag}}
+                {% for worker in workers %}
+                <div style="border-radius: 30px;" id="{{worker.pk}}" class="card m-3 p-2 bg-body ">
+                    <div class="row g-0 ">
+                        <div class="col">
+                            <img style="width: 200px;" class="card-img p-3" src="{{worker.profile.avatar.url}}"
+                                alt="...">
+                        </div>
+                        <div class="col-8">
+                            <div class="card-body">
+                                <h5 class="card-title color">{{worker.profile.user.first_name}}
+                                    {{worker.profile.user.last_name}}
+                                </h5>
+                                <h6 class="card-subtitle mb-2 text-muted"><i
+                                        class="fas fa-map-marker-alt me-2"></i>{{worker.city}}
+                                    -
+                                    {{worker.address}}</h6>
+                                <div class="d-flex flex-row">
+
+                                    {% for tag in worker.list_professions %}
+                                    <div class="label  rounded-pill baccent1 me-1 p-1 px-2 rounded ">
+
+                                        {{tag}}
+                                    </div>
+                                    {% endfor%}
                                 </div>
-                                {% endfor%}
+                                <hr class="my-1">
+                                <p class="card-text">
+                                    {{worker.bio}}
+                                </p>
+                                <div class="d-flex justify-content-evenly ">
+
+                                    <button type="button" class="btn btn-primary btn-lg flex-fill mx-1"><i
+                                            class="fas fa-phone-alt"></i> Call</button>
+                                    <button type="button" class="btn btn-primary btn-lg flex-fill mx-1"> <i
+                                            class="fas fa-envelope"></i> Message</button>
+                                </div>
+                                <!-- <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p> -->
                             </div>
-                            <p class="card-text">
-                                {{worker.bio}}
-                            </p>
-                            <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
                         </div>
                     </div>
                 </div>
+                {% endfor %}
             </div>
-            {% endfor %}
+
         </div>
-        <div class="col">
-            map
+        <div class="col p-0">
+            {% leaflet_map "main" callback="map_init" %}
         </div>
     </div>
-</div>
-{% endblock %}
+    <script type="text/javascript">
+        function highlightWorker(id) {
+            $(`#${id}`).addClass('shadow-pulse');
+            $(`#${id}`).on('animationend', function () {
+                $(`#${id}`).removeClass('shadow-pulse');
+                // do something else...
+            });
+        }
+        function onMapClick(e) {
+            console.log(e);
+        }
+        function markerOnClick(e) { }
+        var workers = JSON.parse('{{ workers_json| safe}}').features
+        console.log(workers)
+        function map_init(map, options) {
+            map.on('click', onMapClick);
+            // get point lat and lon
+            workers.forEach(worker => {
+
+                var lon = worker.geometry.coordinates[0];
+                var lat = worker.geometry.coordinates[1];
+                console.log(worker, lat, lon)
+                // zoom to point & add it to map
+                map.setView([lat, lon], 12);
+                var marker = L.marker([lat, lon]);
+                marker.id = worker.properties.pk
+                // marker.bindPopup('ID: ' + marker.id)
+                marker.addTo(map).on('click', function (e) {
+                    var i = e.target.id;
+                    console.log(i);
+                    highlightWorker(i);
+                });
+            });
+        }
+
+
+    </script>
+    {% endblock %}
