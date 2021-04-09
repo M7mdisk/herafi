@@ -13,66 +13,136 @@
 {%endblock%}
 
 {% block content %}
-<div class="">
-    <!-- Header -->
-    <h1 style="text-align: center;">Find a Qualified Tradesmen
-        For Any Of Your Needs.
-    </h1>
+<div class="b-example-divider"></div>
 
-    <!-- Search Bar -->
-    <div class="search d-flex justify-content-center align-items-center">
-        <div style="width:35%">
+<div class="container col-xxl-8 px-4 py-5">
+    <div class="row flex-lg-row-reverse align-items-center g-5 py-5">
+        <div class="col-10 col-sm-8 col-lg-6">
+            <img src="static/images/Group 2.png" class="d-block mx-lg-auto img-fluid" width="700" height="500"
+                loading="lazy">
+        </div>
+        <div class="col-lg-6">
+            <h1 class="display-5 fw-bold lh-1 mb-3">Find Qualified Tradesmen in our website</h1>
+            <p class="lead">Search and find a qualified tradesmen in your area and get in touch with them and consider
+                the job done.</p>
+            <div class="d-grid gap-2 d-md-flex justify-content-md-start">
 
-            <div class="input-group">
-                <select class="form-select" id="inputGroupSelect04" aria-label="Example select with button addon">
-                    <option>I am Looking for..</option>
-                    {% for profession in professions %}
-                    <option value="{{profession.pk}}">{{profession.name}}</option>
-                    {% endfor %}
-                </select>
-
-                <select class="form-select" id="inputGroupSelect04" aria-label="Example select with button addon">
-                    <option value="">Location..</option>
-                    {% for profession in professions %}
-                    <option value="{{profession.pk}}">{{profession.name}}</option>
-                    {% endfor %}
-                </select>
-                <button class="btn btn-dark" type="button"><i class="fas fa-search"></i></button>
+                <div class="input-group">
+                    <select class="form-select" id="inputGroupSelect04">
+                        <option selected>Choose Profession...</option>
+                        {% for profession in professions %}
+                        <option value="{{ profession.pk }}">{{profession.name}}</option>
+                        {% endfor %}
+                    </select>
+                    <select class="form-select" id="inputGroupSelect04">
+                        <option selected>Choose Location...</option>
+                        <option value="1">Jabriya</option>
+                        <option value="2">Salmiya</option>
+                        <option value="3">Hawalli</option>
+                    </select>
+                    <div class="input-group-append">
+                        <button class="input-group-text" for="inputGroupSelect02" type="button"
+                            class="btn btn-primary">Search</button>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
-    <img src="static/images/tradesman-working-on-pipes-vector.jpg" class="rounded mx-auto d-block" alt="..." width="300" height="300" style="margin-top: 100px;">
-    <div class="row">
-        <div class="col-lg" style="margin-top: 150px; text-align: center;">
-            <div class="text-center">
-                <img src="static/images/pin.png" class="rounded" alt="..." width="50" height="50">
-            </div>
-            <h3>Find</h3>
-            <p style="text-align: center;">A Tradesman near you with
-                the skills you need.
-            </p>
-        </div>
-        <div class="col-lg" style="margin-top: 150px; text-align: center;">
-            <div class="text-center">
-                <img src="static/images/email.png" class="rounded" alt="..." width="50" height="50">
-            </div>
-            <h3>Contact</h3>
-            <p>
-                The Tradesman and discuss
-                your requirments.
-            </p>
-        </div>
-        <div class="col-lg" style="margin-top: 150px; text-align: center;">
-            <div class="text-center">
-                <img src="static/images/check.png" class="rounded" alt="..." width="50" height="50">
-            </div>
-            <h3>Accomplish</h3>
-            <p>
-                Get the task you need done by
-                the best at their field.
-            </p>
-        </div>
+</div>
+
+<div class="b-example-divider"></div>
+
+
+<div class="pt-5 my-5 text-center">
+
+    <div>
+        <style>
+            .bg {
+                z-index: 1;
+            }
+
+            .location {
+                position: absolute;
+                top: 930px;
+                left: 300px;
+                z-index: 2;
+            }
+
+            .message {
+                position: absolute;
+                top: 930px;
+                left: 900px;
+                z-index: 3;
+            }
+
+            .tick {
+                position: absolute;
+                top: 930px;
+                left: 1500px;
+                z-index: 4;
+            }
+
+            .find {
+                position: absolute;
+                top: 1040px;
+                left: 322px;
+                z-index: 2;
+            }
+
+            .contact {
+                position: absolute;
+                top: 1040px;
+                left: 900px;
+                z-index: 3;
+            }
+            .accomplish {
+                position: absolute;
+                top: 1040px;
+                left: 1470px;
+                z-index: 2;
+            }
+            #locate {
+                position: absolute;
+                top: 1090px;
+                left: 170px;
+                z-index: 2;
+            }
+            #contact {
+                position: absolute;
+                top: 1090px;
+                left: 760px;
+                z-index: 2;
+            }
+            #done {
+                position: absolute;
+                top: 1090px;
+                left: 1350px;
+                z-index: 2;
+            }
+        </style>
+
+        <body>
+            <img class="bg" src="static/images/Rectangle 4(1).png" alt="Example image">
+            <img class="location" src="static/images/Location.svg" alt="Location">
+            <h2 class="find">Find</h2>
+            <p class="lead" id="locate">A Tradesmen near you,
+                with the skills you need.</p>
+            <img class="message" src="static/images/Message(Blue).svg" alt="Location">
+            <h2 class="contact">Contact</h2>
+            <p class="lead" id="contact">The Tradesmen and discuss
+                your requierments.</p>
+            <img class="tick" src="static/images/Tick Square(Green).svg" alt="Location">
+            <h2 class="accomplish">Accomplish</h2>
+            <p class="lead" id="done">Get the task you need done by 
+                the best at thier field</p>
+            
+            <p class="lead">Install our app</p>
+            <img src="static/images/google-play-badge 1.png" alt="app" width="300" height="150">
+        </body>
+
     </div>
+
+
 </div>
 {% endblock %}
 
