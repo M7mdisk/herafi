@@ -35,10 +35,15 @@ class Worker(models.Model):
     professions = models.ManyToManyField(Profession)
 
     @property
+    def list_professions(self):
+        return self.professions.all()
+    @property
     def ratings(self):
         return Review.objects.filter(reviewee=self)
     @property
     def rating_average(self):
+        if len(self.ratings) == 0:
+            return 0
         return sum([x.rating for x in self.ratings])/len(self.ratings)
 
     def __str__(self):
