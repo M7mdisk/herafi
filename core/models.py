@@ -24,6 +24,14 @@ class Profession(models.Model):
     def __str__(self):
         return self.name
 
+class City(models.Model):
+    name = models.CharField(max_length=50)
+
+    # class Meta:
+    #     ordering = ['name']
+
+    def __str__(self):
+        return self.name
 
 class Worker(models.Model):
     profile = models.OneToOneField(Profile,primary_key=True, on_delete=models.CASCADE, related_name="profile")
@@ -31,12 +39,16 @@ class Worker(models.Model):
     bio = models.TextField(blank=True)
     location = models.PointField()
     address = models.CharField(max_length=100)
-    city = models.CharField(max_length=50)
+    # city = models.CharField(max_length=50)
+    cities = models.ManyToManyField(City)
     professions = models.ManyToManyField(Profession)
 
     @property
     def list_professions(self):
         return self.professions.all()
+    @property
+    def list_cities(self):
+        return self.cities.all()
     @property
     def ratings(self):
         return Review.objects.filter(reviewee=self)

@@ -36,9 +36,9 @@
                     </select>
                     <select class="form-select" id="inputGroupSelect04">
                         <option selected>Choose Location...</option>
-                        <option value="1">Jabriya</option>
-                        <option value="2">Salmiya</option>
-                        <option value="3">Hawalli</option>
+                        {% for city in location %}
+                        <option value="{{ city.pk }}">{{city.name}}</option>
+                        {% endfor %}
                     </select>
                     <div class="input-group-append">
                         <button class="input-group-text" for="inputGroupSelect02" type="button"

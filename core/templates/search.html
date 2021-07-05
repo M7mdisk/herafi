@@ -23,6 +23,12 @@
                     <option value="{{profession.pk}}">{{profession.name}}</option>
                     {% endfor %}
                 </select>
+                <select class="form-select" id="inputGroupSelect04">
+                    <option selected>Choose Location...</option>
+                    {% for city in location %}
+                    <option value="{{ city.pk }}">{{city.name}}</option>
+                    {% endfor %}
+                </select>
                 <button class="btn btn-dark" type="button"><i class="fas fa-search"></i></button>
             </div>
         </div>
@@ -33,7 +39,7 @@
 
                 <h2 class="ps-3 fw-bold">{{workers|length}} Worker {% if workers|length > 1 %}s{% endif %}
                     found in
-                    {{location}}.
+                    {{worker.location}}.
                 </h2>
 
                 {% for worker in workers %}
@@ -48,8 +54,10 @@
                                 <h5 class="card-title color">{{worker.profile.user.first_name}}
                                     {{worker.profile.user.last_name}}
                                 </h5>
-                                <h6 class="card-subtitle mb-2 text-muted"><i
-                                        class="fas fa-map-marker-alt me-2"></i>{{worker.city}}
+                                <h6 class="card-subtitle mb-2 text-muted">
+                                    {% for city in worker.list_cities %}
+                                    <i class="fas fa-map-marker-alt me-2"> {{city}}</i>
+                                    {% endfor %}
                                     -
                                     {{worker.address}}</h6>
                                 <div class="d-flex flex-row">
