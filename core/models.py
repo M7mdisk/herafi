@@ -42,6 +42,8 @@ class Worker(models.Model):
         return Review.objects.filter(reviewee=self)
     @property
     def rating_average(self):
+        if len(self.ratings) == 0:
+            return 0
         return sum([x.rating for x in self.ratings])/len(self.ratings)
 
     def __str__(self):
